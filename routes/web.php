@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Models\Category;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -77,4 +78,37 @@ Route::delete('/task/{task}', function (Task $task) {
     $task->delete();
 
     return redirect('/');
+});
+
+
+Route::get('/category', function () {
+    $categories = Category::orderBy('created_at', 'asc')->get();
+
+    return view('category', [
+        'categories' => $categories
+    ]);
+});
+
+Route::post('/categories', function (Request $request) {
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|max:20',
+    ]);
+
+    if ($validator->fails()) {
+        return redirect('/category')
+            ->withInput()
+            ->withErrors($validator);
+    }
+
+    $task = new Task;
+    $task->name = $request->name;
+    $task->save();
+
+});
+ 
+
+Route::delete('/category/{category}', function (Category $categories) {
+    $categories->delete();
+
+    return redirect('/category');
 });
