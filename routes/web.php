@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\Task;
+use App\Models\Category;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +14,33 @@ use App\Models\Task;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/categories', function () {
+    $categories = Category::orderBy('created_at', 'asc')->get();
+
+    return view('tasks', [
+        'Categories' => $categories
+    ]);
+});
+
+Route::post('/categories', function (Request $request) {
+    $validator = Validator::make($request->all(), [
+        'name' => 'required|max:20',
+    ]);
+
+    if ($validator->fails()) {
+        return redirect('/')
+            ->withInput()
+            ->withErrors($validator);
+    }
+
+    $category = new Category;
+    $category->name = $request->name;
+    $category->save();
+
+    return redirect('/categories');
+});
+
 
 Route::get('/', function () {
     $tasks = Task::orderBy('created_at', 'asc')->get();
