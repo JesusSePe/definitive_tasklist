@@ -45,9 +45,10 @@ Route::post('/categories', function (Request $request) {
 
 Route::get('/', function () {
     $tasks = Task::orderBy('created_at', 'asc')->get();
+    $categories = Category::all();
 
     return view('tasks', [
-        'tasks' => $tasks
+        'tasks' => $tasks, 'categories' => $categories
     ]);
 });
 /**
@@ -66,6 +67,7 @@ Route::post('/task', function (Request $request) {
 
     $task = new Task;
     $task->name = $request->name;
+    $task->cat_id = $request->task_cat;
     $task->save();
 
     return redirect('/');

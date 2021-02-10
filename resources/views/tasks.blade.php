@@ -20,6 +20,11 @@
 
                 <div class="col-sm-6">
                     <input type="text" name="name" id="task-name" class="form-control">
+                    <select name="task_cat">
+                        @foreach($categories as $cat)
+                        <option value="{{$cat->id}}"> {{$cat->name}}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
 
