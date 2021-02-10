@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
+
+    /**
+     * Accedeix als fills (Post)
+     */
+    public function category(){
+        return $this->hasMany('App\Models\Task', 'id');
+    }
 }
