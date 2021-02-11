@@ -4,6 +4,8 @@
 
 @section('content')
 
+<p><a href="/catlist">Llista de tasques</a></p>
+
     <!-- Bootstrap Boilerplate... -->
 
     <div class="panel-body">

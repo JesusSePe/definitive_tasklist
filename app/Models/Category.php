@@ -12,7 +12,7 @@ class Category extends Model
     /**
      * Accedeix als fills (Post)
      */
-    public function category(){
-        return $this->hasMany('App\Models\Task', 'id');
+    public function tasks(){
+        return $this->hasMany(Task::class, 'cat_id');
     }
 }

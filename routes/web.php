@@ -114,3 +114,16 @@ Route::delete('/category/{category}', function (Category $categories) {
 
     return redirect('/category');
 });
+
+
+/**
+ * Tasks per Category
+ */
+
+ Route::get('/catlist', function() {
+    $cats = Category::all();
+
+    return view('catlist', [
+        'cats' => $cats,
+    ]);
+ });
