@@ -127,3 +127,14 @@ Route::delete('/category/{category}', function (Category $categories) {
         'cats' => $cats,
     ]);
  });
+
+ //Pseudo API
+ Route::get('/cats', function(Request $req) {
+    $cats = Category::all();
+
+    return json_encode($cats);
+ });
+
+  Route::get('/ajaxcats', function(Request $req) {
+    return view('cats');
+ });

@@ -27,7 +27,7 @@ class TaskFactory extends Factory
         return [
             'name' => $this->faker->word,
             'prio' => $this->faker->numberBetween(0,100),
-            'limit' => $this->faker->dateTimeThisMonth(),
+            'limit' => $this->faker->dateTimeBetween('now', '1 month'),
             'cat_id' => Category::all()->random()->id
         ];
     }
